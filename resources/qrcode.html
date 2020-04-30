@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid black;
+        border-radius: 5px;
+        align-items: center;
+        width: min-content;
+        margin: auto;
+      }
+
+      #progressivo {
+        font-size: 3em;
+        font-weight: 700;
+      }
+
+      #data {
+        font-style: italic;
+        white-space: nowrap;
+        padding: 0 0.5rem;
+      }
+    </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function (event) {
+        document.getElementById('data').innerHTML = new Date().toLocaleString();
+      });
+
+      function set(progressivo, qrCodeImageUrl) {
+        document.getElementById('progressivo').innerText = progressivo;
+        document.getElementById('qrcode').src = qrCodeImageUrl;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="progressivo">52</div>
+      <div class="qrcode-wrapper">
+        <img
+          id="qrcode"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgAQAAAACjtFqAAAABuElEQVR42u2WvY2EMBCFH3LgjG3AEm2QuaWlAX4aMC2RuQ0kNwCZA2vnHgTLnnSBTXqLkIAvGHnezLwB8seFL/wPENDrIGu1NPuCqhg24lMnavcyedmLoam86by8dDN5dLfgQ/DwDHsPqq2VOfJsN+DxDpuelmE/08yE1JMZnfcvkTPhEfalxelm/1XiTGigU6/TIEoWDMWwmWPYowHW3spcDjesgz8FiTIVw8BEdmkcZMRbz3xoHotyFp0P86VnPmQcDD6MMMxIiqGptakWtWnlEKZiqFwbRr3CmvrSMx+KeFOjkUXxpSuGpm4xxIQ2dfEdMx8mBtx4W+r5zqgAwqoNbIZUxXc18yGdJ4ztUZHp6uR8aKoYRitjawYJczFM3dkJT9u4Vu3F8NBw0xxk84SaimFwQA868ArQCUuh4hSPjEYDvDwkH3KO2EKpP1txKoedmF4fU8zgN+DgQfNnLUbgUQyPR23DFBn86pBsSPeWDRyiz9WTD7k7DNr1SSugAxdDbi6ehCv7yKi7AxuJHCLOgrkFOYY8WHAf1cyG/JQXUs3Ntai9GFJPbp/DvR1MVQy//4pfeF4/y4tTZYJXnnEAAAAASUVORK5CYII="
+        />
+      </div>
+      <div id="data"></div>
+    </div>
+  </body>
+</html>

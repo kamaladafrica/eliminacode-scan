@@ -1,0 +1,30 @@
+.card {
+  width: 90vw;
+  max-width: 1024px;
+}
+
+.current-number {
+  font-size: 30vh;
+}
+
+button.new-number {
+  font-size: 3.5em;
+  font-weight: 300;
+  min-height: 8rem;
+  outline: none;
+}
+
+.card-footer {
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.spinner {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.text-lg {
+  font-size: 2rem;
+  padding-left: 0.5rem;
+}

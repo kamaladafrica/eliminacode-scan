@@ -13,7 +13,7 @@ import log from 'electron-log';
 import { autoUpdater } from 'electron-updater';
 import path from 'path';
 import MenuBuilder from './menu';
-import { setupPrinterMain } from './utils/printer';
+import { setupScannerMain } from './utils/scanner';
 
 export default class AppUpdater {
   constructor() {
@@ -82,8 +82,6 @@ const createWindow = async () => {
     } else {
       mainWindow.show();
       mainWindow.focus();
-      mainWindow.setKiosk(true);
-      mainWindow.setMenuBarVisibility(false);
     }
   });
 
@@ -94,7 +92,7 @@ const createWindow = async () => {
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 
-  setupPrinterMain();
+  setupScannerMain(mainWindow);
 };
 
 /**

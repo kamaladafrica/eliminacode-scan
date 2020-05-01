@@ -1,26 +1,40 @@
-import React from 'react';
-import Counter from '../components/Counter';
-import { useTag } from '../hooks/useTag';
-import { printTag } from '../utils/printer';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 
 export default () => {
-  const [state, newTag] = useTag(
-    (progressivo: number, qrCodeImageUrl: string) => {
-      printTag({
-        progressivo,
-        qrCodeImageUrl,
-      });
+  const [text, setText] = useState('');
+  const [code, setCode] = useState('');
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const code = e.target.value;
+    setText(code);
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(e.key, e.keyCode);
+    if (e.key === 'Enter') {
+      const code = e.currentTarget.value;
+      setCode((buf) => buf + '\n' + code);
+      setText('');
     }
-  );
+  };
 
   return (
-    <Counter
-      fila={state.fila.length}
-      newTag={newTag}
-      progressivo={state.progressivo}
-      last={state.lastBruciato}
-      next={state.prossimo}
-      tempoStimato={state.tempoStimato}
-    />
+    <div>
+      <div className="form-group row">
+        <div className="col-sm-10">
+          <input
+            type="text"
+            className="form-control form-control-lg"
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            value={text}
+          />
+          <button type="button" onClick={() => setCode('')}>
+            Reset
+          </button>
+        </div>
+      </div>
+      <pre>{code}</pre>
+    </div>
   );
 };

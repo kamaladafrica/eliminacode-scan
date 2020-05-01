@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import './app.global.css';
 import Root from './containers/Root';
-import { setupPrinterRenderer } from './utils/printer';
+import { setupScannerRenderer } from './utils/scanner';
 
 const AppContainer = process.env.PLAIN_HMR ? Fragment : ReactHotAppContainer;
 
@@ -16,4 +16,4 @@ document.addEventListener('DOMContentLoaded', () =>
   )
 );
 
-setupPrinterRenderer();
+setupScannerRenderer(console.log);

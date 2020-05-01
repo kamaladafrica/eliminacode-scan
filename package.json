@@ -1,8 +1,8 @@
 {
-  "name": "eliminacode-conadcitycapena-kiosk",
+  "name": "eliminacode-conadcitycapena-scan",
   "productName": "Eliminacode Conad City Capena",
   "version": "1.1.0",
-  "description": "Kiosk eliminacode Conad City Capena",
+  "description": "Scan eliminacode Conad City Capena",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -199,6 +199,7 @@
     "@types/react-router-dom": "^5.1.3",
     "@types/react-test-renderer": "^16.9.2",
     "@types/redux-logger": "^3.0.7",
+    "@types/serialport": "6.0.1",
     "@types/sinon": "^7.5.2",
     "@types/tapable": "^1.0.5",
     "@types/vfile-message": "^2.0.0",
@@ -278,6 +279,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@hot-loader/react-dom": "^16.13.0",
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",

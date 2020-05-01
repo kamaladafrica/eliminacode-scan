@@ -2,11 +2,13 @@ import { app, BrowserWindow, dialog, ipcRenderer, shell } from 'electron';
 import SerialPort, { parsers } from 'serialport';
 import { bruciaTag } from '../api/api';
 import env from '../environment';
+import logger from '../utils/logger';
 
 const CLEAR_DONE_TIMEOUT = 60000;
 
 const findReader = ({ vendorId, productId }: Device) =>
-  vendorId === env.reader.vendorId && productId === env.reader.productId;
+  vendorId.toLowerCase() === env.reader.vendorId.toLowerCase() &&
+  productId.toLowerCase() === env.reader.productId.toLowerCase();
 
 enum Event {
   SCAN_READ = 'scan-read',
@@ -33,23 +35,28 @@ const done: Done = {};
 
 export const setupScannerMain = async (win: BrowserWindow) => {
   const devices = (await SerialPort.list()) as Device[];
-  const reader = devices
-    .filter((device) => device.serialNumber)
-    .find(findReader);
+
+  devices.forEach((d) => logger.verbose(d));
+
+  const readyDevices = devices.filter((device) => device.serialNumber);
+  readyDevices.forEach((d) => logger.debug(d));
+
+  const reader = readyDevices.find(findReader);
+  logger.info('Found reader: ', reader);
 
   if (!reader) {
+    logger.error('No reader found.');
     dialog.showErrorBox(
       'Impossibile trovare il lettore di QRCode',
       "Collegare il lettore all'USB e riavviare l'applicazione"
     );
     app.exit(1);
   } else {
-    console.log(reader);
     const parser = new parsers.Readline({ delimiter: '\r' });
     const port = new SerialPort(reader.path);
     port.pipe(parser);
     parser.on('data', async (data) => {
-      console.log(data);
+      logger.verbose(data);
       const isDone = done[data] ?? false;
       if (!isDone) {
         done[data] = true;

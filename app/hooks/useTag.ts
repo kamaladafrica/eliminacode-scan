@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import * as api from '../api/api';
 import env from '../environment';
+import logger from '../utils/logger';
 
 const STATS_DELAY = env.fetchStatsDelay;
 
@@ -72,7 +73,7 @@ export const useTag = (printTag: PrintTagAction): TagHookReturn => {
       printTag(tag.progressivo, tag.qrCodeImageUrl);
       fetchStats();
     } catch (error) {
-      console.log(error);
+      logger.log(error);
       // clearTagState();
     }
   }, [state]);
